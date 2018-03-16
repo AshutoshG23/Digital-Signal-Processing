@@ -1,0 +1,15 @@
+clc;clear all;
+fm = input('Enter max freq of sine: ');
+fs = input('Enter sampling freq: ');
+d=input('Enter decimation factor: ');
+w = (2*pi*fm)/fs;
+n = 1:100;
+x = sin(w*n);
+y = x(1:d:end);
+n1 = n(1:d:end);
+y1 = downsample(x,d);
+y2 = decimate(x,d);
+subplot(2,2,1);stem(n,x);title('Original signal');xlabel('n');
+subplot(2,2,2);stem(n1,y);title('After Decimation');xlabel('n');
+subplot(2,2,3);stem(n1,y1);title('downsample()');xlabel('n');
+subplot(2,2,4);stem(n1,y2);title('decimate()');xlabel('n');

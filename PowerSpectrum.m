@@ -1,0 +1,14 @@
+clc;clear all;
+fm=input('Enter max freq of sine: ');
+fs=input('Enter sampling freq: ');
+w=(2*pi*fm)/fs;
+N=1024;
+k=0:N-1;
+n=0:N-1;
+x1 = sin(w*n);
+X = DiscreteFTFn(x1,N,k,n);
+X1=abs(X);
+X2=X1(1:N/2);
+f=(fs/2)*linspace(0,1,N/2);
+subplot(2,1,1);stem(f,X2);title('DFT of Sine');xlabel('f');ylabel('abs(X)');
+subplot(2,1,2);stem(f,X2.^2);title('Power Spectrum of Sine');xlabel('f');ylabel('Power Spectrum');

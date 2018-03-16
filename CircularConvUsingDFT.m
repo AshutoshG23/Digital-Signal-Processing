@@ -1,0 +1,16 @@
+clc;clear all;
+x = [2 3 4 5]; h = [1 2 3];
+L = length(x); M = length(h);
+N = max(L,M);
+n = 0 : N-1;
+x1 = [x zeros(1,N-L)];
+h1 = [h zeros(1,N-M)];
+X1 = DiscreteFTFn(x1,N,n,n);
+H1 = DiscreteFTFn(h1,N,n,n);
+Y = X1.*H1;
+y = InvDFTFn(Y,N,n,n);
+y1 = cconv(x1,h1,N);
+subplot(2,2,1);stem(n,x1);title('Sequence1');xlabel('n');ylabel('x');
+subplot(2,2,2);stem(n,h1);title('Sequence2');xlabel('n');ylabel('h');
+subplot(2,2,3);stem(n,y);title('Circular Convolution');xlabel('n');ylabel('y');
+subplot(2,2,4);stem(n,y1);title('cconv()');xlabel('n');ylabel('y1');
